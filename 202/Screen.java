@@ -16,6 +16,7 @@ public class Screen extends Actor
      private Keypad keypad;
      private String zipcode;
      private int state;
+     private CreditCard creditCard;
     public Screen() {
         GreenfootImage image = getImage();
         image.scale(300, 200);
@@ -47,16 +48,21 @@ public class Screen extends Actor
     public void insertCreditCard()
     {
         keypad = getWorld().getObjects(Keypad.class).get(0);
+        creditCard = getWorld().getObjects(CreditCard.class).get(0);
         String str = "Credit card inserted" +"\n" + "Please enter zipcode\n";
         setMessage(str);
         state = 1;
         //if (Greenfoot.mousePressed(Keypad.class)) {
-        if (zipcode != null) {
+        if (zipcode != null && zipcode.length() <= 5) {
             str = str + "Zipcode entered is "+ "\n";
             str += zipcode;
             setMessage(str);
         }
-       // }
+        if (zipcode.length() == 5 && creditCard.checkZipcode(zipcode))
+        {
+            //selectGrade();
+        }
+        
     }
     public void setZipcode(String str)
     {
@@ -70,4 +76,5 @@ public class Screen extends Actor
     {
         return state;
     }
+    
 }
