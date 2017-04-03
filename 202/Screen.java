@@ -58,10 +58,10 @@ public class Screen extends Actor
             str += zipcode;
             setMessage(str);
         }
-        if (zipcode.length() == 5 && creditCard.checkZipcode(zipcode))
-        {
+        //if (zipcode.length() == 5 && creditCard.checkZipcode(zipcode))
+       // {
             //selectGrade();
-        }
+        //}
         
     }
     public void setZipcode(String str)
