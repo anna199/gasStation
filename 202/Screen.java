@@ -14,6 +14,8 @@ public class Screen extends Actor
      */
      private Message message = new Message();
      private Keypad keypad;
+     private String zipcode;
+     private int state;
     public Screen() {
         GreenfootImage image = getImage();
         image.scale(300, 200);
@@ -23,6 +25,12 @@ public class Screen extends Actor
     public void act() 
     {
         // Add your action code here.
+        if (state == 0 ) {
+            welcome();
+        }
+        if (state == 1) {
+            insertCreditCard();
+        }
         
     } 
     public void setMessage (String str) 
@@ -33,6 +41,7 @@ public class Screen extends Actor
     public void welcome() {
         String str = "Welcome to Super 5 Gas Station" + "\n" +"Please insert card";
         setMessage(str);
+        state = 0;
         
     }
     public void insertCreditCard()
@@ -40,14 +49,23 @@ public class Screen extends Actor
         keypad = getWorld().getObjects(Keypad.class).get(0);
         String str = "Credit card inserted" +"\n" + "Please enter zipcode\n";
         setMessage(str);
+        state = 1;
         //if (Greenfoot.mousePressed(Keypad.class)) {
-        int i = 0;
-       if (Greenfoot.mousePressed(Keypad.class) == true)
-        {
-            str = str + keypad.checkEnteredNum();
-            setMessage(str);
-            i++;
+        if (zipcode != null) {
+            setMessage(zipcode);
         }
        // }
+    }
+    public void setZipcode(String str)
+    {
+        zipcode = str;
+    }
+    public String getZipcode()
+    {
+        return zipcode;
+    }
+    public int getState()
+    {
+        return state;
     }
 }

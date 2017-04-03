@@ -12,6 +12,7 @@ public class Keypad extends Actor
      * Act - do whatever the Keypad wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+   private Screen screen;
     public Keypad() {
         GreenfootImage image = getImage();
         image.scale(150, 150);
@@ -19,15 +20,69 @@ public class Keypad extends Actor
     public void act() 
     {
         // Add your action code here.
-    }
-    public int checkEnteredNum() {
         if (Greenfoot.mousePressed(this)) {
-           // MouseInfo mouse = Greenfoot.getMouseInfo();
-            //if (mouse.getX() == getX() + 5 && mouse.getY() == getY() + 5) {
-                return 1;
-            //}
-           // return 1;
+            MouseInfo mouse = Greenfoot.getMouseInfo();
+          screen = getWorld().getObjects(Screen.class).get(0);
+          int num = checkEnteredNum(mouse.getX(),mouse.getY());
+          String str = screen.getZipcode();
+          if (str != null) {   
+           str = str + num;
         }
-        return -1;
+        else {
+            str = ""+num;
+        }
+           screen.setZipcode(str);
+        }
+    }
+    public int checkEnteredNum(int x, int y) {
+        if ( x < getX() - 35  && y < getY() - 35) {
+            return 1;
+        }
+        else if (x > getX() - 35   && x < getX() && y < getY() - 35) {
+            return 2;
+        }
+        else if (x < getX() + 35   && x > getX() && y < getY() - 35) {
+            return 3; 
+        }
+        else if (x > getX() + 35  && y < getY() - 35) {
+            return -1; //Yes 
+        }
+       else if (x < getX() - 35  && y < getY() && y > getY() - 35) {
+            return 4;
+        }
+       else if (x > getX() - 35   && x < getX() && y< getY() && y > getY() - 35) {
+            return 5;
+        }
+       else if (x > getX() && x < getX() + 35 && y < getY() && y > getY() - 35) {
+            return 6;
+        }
+       else if (x > getX() + 35 && y < getY() && y > getY() - 35) {
+            return -2; //NO
+        }
+       else if (x < getX() - 35 && y > getY() && y < getY() + 35) {
+            return 7;
+       }
+       else if (x > getX() - 35   && x < getX() && y > getY() && y< getY() + 35) {
+            return 8;
+       }
+       else if (x > getX()   && x < getX() + 35  && y > getY() && y< getY() + 35) {
+            return 9;
+       }
+       else if (x > getX() + 35 && y > getY() && y< getY() + 35) {
+            return -3; //CANCEL
+       }
+       else if (x < getX() - 35 && y > getY() + 35) {
+            return -4; // CLEAR
+       } 
+       else if (x > getX() - 35   && x < getX() && y > getY() + 35) {
+            return 0;
+       }
+       else if (x > getX() && x < getX() + 35 && y > getY() + 35) {
+            return -5; //ENTER
+       }
+       else if (x > getX() + 35 && y > getY() + 35) {
+            return -6; //DEBIT
+       }
+       return -7;
     }
 }
