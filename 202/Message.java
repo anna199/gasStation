@@ -27,7 +27,7 @@ public class Message extends Actor
      
     private void updateImage(String text)
     {
-       GreenfootImage g=new GreenfootImage(200,50);
+       GreenfootImage g=new GreenfootImage(200,80);
        g.setColor(greenfoot.Color.WHITE);
        g.fill();
        g.setColor(greenfoot.Color.BLACK);

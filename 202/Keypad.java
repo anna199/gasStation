@@ -21,16 +21,16 @@ public class Keypad extends Actor
     {
         // Add your action code here.
         if (Greenfoot.mousePressed(this)) {
-            MouseInfo mouse = Greenfoot.getMouseInfo();
+          MouseInfo mouse = Greenfoot.getMouseInfo();
           screen = getWorld().getObjects(Screen.class).get(0);
           int num = checkEnteredNum(mouse.getX(),mouse.getY());
           String str = screen.getZipcode();
           if (str != null) {   
-           str = str + num;
-        }
-        else {
+             str = str + num;
+          }
+          else {
             str = ""+num;
-        }
+          }
            screen.setZipcode(str);
         }
     }

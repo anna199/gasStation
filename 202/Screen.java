@@ -36,7 +36,7 @@ public class Screen extends Actor
     public void setMessage (String str) 
     {
        message.setText(str);
-       getWorld().addObject(message,400,150);
+       getWorld().addObject(message,400,160);
     }
     public void welcome() {
         String str = "Welcome to Super 5 Gas Station" + "\n" +"Please insert card";
@@ -52,7 +52,9 @@ public class Screen extends Actor
         state = 1;
         //if (Greenfoot.mousePressed(Keypad.class)) {
         if (zipcode != null) {
-            setMessage(zipcode);
+            str = str + "Zipcode entered is "+ "\n";
+            str += zipcode;
+            setMessage(str);
         }
        // }
     }
