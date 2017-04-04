@@ -32,6 +32,7 @@ public class Screen extends Actor
         if (state == 1) {
             insertCreditCard();
         }
+<<<<<<< HEAD
         if (state == 2) {
             wrongZipcode();
         }
@@ -51,6 +52,8 @@ public class Screen extends Actor
          chooseFuelType();
         }
        
+=======
+>>>>>>> master
         
     } 
     public void setMessage (String str) 
@@ -75,6 +78,7 @@ public class Screen extends Actor
         if (zipcode != null && zipcode.length() <= 5) {
             str = str + "Zipcode entered is "+ "\n";
             str += zipcode;
+<<<<<<< HEAD
             setMessage(str);
         }
         //if (zipcode.length() == 5 && creditCard.checkZipcode(zipcode))
@@ -157,6 +161,15 @@ public class Screen extends Actor
         keypad = getWorld().getObjects(Keypad.class).get(0);
         setMessage("Please choose fuel type!");
         state = 6;
+=======
+            setMessage(str);
+        }
+        //if (zipcode.length() == 5 && creditCard.checkZipcode(zipcode))
+       // {
+            //selectGrade();
+        //}
+        
+>>>>>>> master
     }
     public void setZipcode(String str)
     {
@@ -169,10 +182,13 @@ public class Screen extends Actor
     public int getState()
     {
         return state;
+<<<<<<< HEAD
     }
     public void setState(int i)
     {  
         state = i;
+=======
+>>>>>>> master
     }
     
 }

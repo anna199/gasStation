@@ -34,6 +34,7 @@ public class Keypad extends Actor
           screen = getWorld().getObjects(Screen.class).get(0);
           int num = checkEnteredNum(mouse.getX(),mouse.getY());
           String str = screen.getZipcode();
+<<<<<<< HEAD
           if (str != null) { 
               if(num >= 0)
               {
@@ -65,12 +66,21 @@ public class Keypad extends Actor
               }
           }
           else{
+=======
+          if (str != null) {   
+             str = str + num;
+          }
+          else {
+>>>>>>> master
             str = ""+num;
           }
            screen.setZipcode(str);
         }
     }
+<<<<<<< HEAD
  
+=======
+>>>>>>> master
     public int checkEnteredNum(int x, int y) {
         if ( x < getX() - 35  && y < getY() - 35) {
             return 1;

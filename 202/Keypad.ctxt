@@ -4,9 +4,16 @@ comment0.text=\n\ Write\ a\ description\ of\ class\ Keypad\ here.\n\ \n\ @author
 comment1.params=
 comment1.target=Keypad()
 comment2.params=
+<<<<<<< HEAD
 comment2.target=int\ getNum()
 comment3.params=
 comment3.target=void\ act()
 comment4.params=x\ y
 comment4.target=int\ checkEnteredNum(int,\ int)
 numComments=5
+=======
+comment2.target=void\ act()
+comment3.params=x\ y
+comment3.target=int\ checkEnteredNum(int,\ int)
+numComments=4
+>>>>>>> master

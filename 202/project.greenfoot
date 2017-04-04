@@ -47,6 +47,7 @@ dependency8.type=UsesDependency
 dependency9.from=MyWorld
 dependency9.to=CreditCardSlot
 dependency9.type=UsesDependency
+<<<<<<< HEAD
 editor.fx.0.height=0
 editor.fx.0.width=0
 editor.fx.0.x=0
@@ -55,6 +56,16 @@ mainWindow.height=725
 mainWindow.width=1094
 mainWindow.x=186
 mainWindow.y=23
+=======
+editor.fx.0.height=722
+editor.fx.0.width=800
+editor.fx.0.x=1705
+editor.fx.0.y=126
+mainWindow.height=707
+mainWindow.width=1094
+mainWindow.x=79
+mainWindow.y=25
+>>>>>>> master
 package.numDependencies=12
 package.numTargets=7
 project.charset=UTF-8
