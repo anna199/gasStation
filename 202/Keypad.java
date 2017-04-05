@@ -17,6 +17,15 @@ public class Keypad extends Actor
         GreenfootImage image = getImage();
         image.scale(150, 150);
     }
+    public int getNum(){
+        int num = 0;
+        if (Greenfoot.mousePressed(this))
+        {
+            MouseInfo mouse = Greenfoot.getMouseInfo();
+            num = checkEnteredNum(mouse.getX(),mouse.getY());
+        }
+        return num;
+    }
     public void act() 
     {
         // Add your action code here.
@@ -25,15 +34,43 @@ public class Keypad extends Actor
           screen = getWorld().getObjects(Screen.class).get(0);
           int num = checkEnteredNum(mouse.getX(),mouse.getY());
           String str = screen.getZipcode();
-          if (str != null) {   
-             str = str + num;
+          if (str != null) { 
+              if(num >= 0)
+              {
+                  if(str.length() < 5)
+                  str = str + num;    
+              }
+              else if(num == -4)
+              {
+                 str = ""; //clear
+              }
+              else if(num == -3)
+              {
+                  str = "";
+                  screen.setState(0);//cancel
+              }
+              else if(num == -5 && screen.getState() == 1)
+              {
+                  if(str.length() == 5)
+                  {
+                      screen.setState(3);
+                      
+                  }
+                  else if(str.length() != 5)
+                  {
+                      str = "";
+                      screen.setState(2);//enter again
+                      
+                   }
+              }
           }
-          else {
+          else{
             str = ""+num;
           }
            screen.setZipcode(str);
         }
     }
+ 
     public int checkEnteredNum(int x, int y) {
         if ( x < getX() - 35  && y < getY() - 35) {
             return 1;

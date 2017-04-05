@@ -14,7 +14,9 @@ public class Screen extends Actor
      */
      private Message message = new Message();
      private Keypad keypad;
+     private GasGrade gasgrade;
      private String zipcode;
+     private String fuelType;
      private int state;
      private CreditCard creditCard;
     public Screen() {
@@ -32,6 +34,28 @@ public class Screen extends Actor
         if (state == 1) {
             insertCreditCard();
         }
+        if (state == 2) {
+            wrongZipcode();
+        }
+        if (state == 3){ 
+           needHelp();
+        }
+   
+       if (state == 4){
+         helpInformation();
+        
+        }
+        if (state == 5){
+           
+         chooseProceed();
+        }
+        if(state == 6){
+         chooseFuelType();
+        }
+       if(state == 7)
+       {
+           showFuelType();
+       }
         
     } 
     public void setMessage (String str) 
@@ -64,6 +88,94 @@ public class Screen extends Actor
         //}
         
     }
+    public void wrongZipcode()
+    {
+   
+        keypad = getWorld().getObjects(Keypad.class).get(0);
+        String str = "Oops,Wrong zipcode.\n Please enter again\n";
+        setMessage(str);
+        state = 2;
+        if (zipcode != null && zipcode.length() <= 5) {
+            str = str + "Zipcode entered is "+ "\n";
+            str += zipcode;
+            setMessage(str);
+        }
+        
+        if(keypad.getNum() == -5 && zipcode.length() == 5)
+        {
+            state = 3;
+        }
+        
+        if(keypad.getNum() == -5 && zipcode.length() != 5)
+        {
+            state = 2;
+            zipcode="";
+            keypad.act();
+            
+        }
+    }
+    public void needHelp()
+    {
+        keypad = getWorld().getObjects(Keypad.class).get(0);
+        setMessage("Need Help?\nYes      No");
+        state = 3;
+            if(keypad.getNum() == -1)//Yes
+                       {
+                          state = 4;//show help information  
+                          
+                       }
+                       else if(keypad.getNum() == -2)//No
+                       {
+                           state = 5;//proceed   
+                       }
+    }
+    public void helpInformation()
+    {
+       keypad = getWorld().getObjects(Keypad.class).get(0);
+       setMessage("Help information----------");  
+       state = 4;
+           if(keypad.getNum() == -5)//proceed
+                          { 
+                           state = 6;
+                          }
+                          else if(keypad.getNum() == -3)//home
+                          {
+                          state = 0;
+                          } 
+    }
+    public void chooseProceed()
+    {
+         keypad = getWorld().getObjects(Keypad.class).get(0);
+         setMessage("press enter to proceed\npress cancel back to pause"); 
+         state = 5; 
+           if(keypad.getNum() == -5)//proceed
+           {
+               state = 6;
+           }
+           else if(keypad.getNum() == -3)//home
+           {
+               state = 0;
+           }
+    }
+    public void chooseFuelType()
+    {
+        keypad = getWorld().getObjects(Keypad.class).get(0);
+        setMessage("Please choose fuel type!");
+        state = 6;
+        MouseInfo mouse = Greenfoot.getMouseInfo();
+       
+       if( state == 6 && keypad.getNum() == -5)//mouse.getX() > gasgrade.getX() - 105 && mouse.getX() < gasgrade.getX() + 105)
+       {
+           state = 7;
+       }
+    }
+    public void showFuelType()
+    {
+        gasgrade = getWorld().getObjects(GasGrade.class).get(0);
+        String showType = "you have choosed #" + fuelType;
+        setMessage(showType);
+        state = 7;
+    }
     public void setZipcode(String str)
     {
         zipcode = str;
@@ -75,6 +187,18 @@ public class Screen extends Actor
     public int getState()
     {
         return state;
+    }
+    public void setState(int i)
+    {  
+        state = i;
+    }
+     public void setFuelType(String str)
+    {
+        fuelType = str;
+    }
+    public String getFuelType()
+    {
+        return fuelType;
     }
     
 }
