@@ -12,7 +12,7 @@ public class Message extends Actor
 {
     public Message()
     {
-        updateImage("");;
+        updateImage("");
     }
      
     public Message(String text)
