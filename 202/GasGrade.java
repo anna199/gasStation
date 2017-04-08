@@ -16,7 +16,7 @@ public class GasGrade extends Actor
     
     public GasGrade() {
         GreenfootImage image = getImage();
-        image.scale(200, 150);
+        image.scale(200, 150);//
     }
     public void act() 
     {
