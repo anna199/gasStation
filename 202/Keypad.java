@@ -13,6 +13,7 @@ public class Keypad extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
    private Screen screen;
+   private CreditCard creditCard;
     public Keypad() {
         GreenfootImage image = getImage();
         image.scale(150, 150);
@@ -32,6 +33,7 @@ public class Keypad extends Actor
         if (Greenfoot.mousePressed(this)) {
           MouseInfo mouse = Greenfoot.getMouseInfo();
           screen = getWorld().getObjects(Screen.class).get(0);
+          creditCard = getWorld().getObjects(CreditCard.class).get(0);
           int num = checkEnteredNum(mouse.getX(),mouse.getY());
           String str = screen.getZipcode();
           if (str != null) { 
@@ -53,13 +55,19 @@ public class Keypad extends Actor
               {
                   if(str.length() == 5)
                   {
-                      screen.setState(3);
-                      
+                      if(creditCard.checkZipcode(str))
+                      {
+                          screen.setState(3);
+                      }
+                      else if(!creditCard.checkZipcode(str))
+                      {   str="";
+                          screen.setState(2);
+                      }
                   }
                   else if(str.length() != 5)
                   {
-                      str = "";
-                      screen.setState(2);//enter again
+                      //str = "";
+                      //screen.setState(2);//enter again
                       
                    }
               }

@@ -16,28 +16,23 @@ public class GasGrade extends Actor
     
     public GasGrade() {
         GreenfootImage image = getImage();
-        image.scale(200, 150);//
+        image.scale(200, 150);
     }
     public void act() 
     {
         
         if (Greenfoot.mousePressed(this))
         {
-          MouseInfo mouse = Greenfoot.getMouseInfo();
+          //MouseInfo mouse = Greenfoot.getMouseInfo();
           screen = getWorld().getObjects(Screen.class).get(0);
-          String type = chooseFuelType(mouse.getX(),mouse.getY());
-          screen.setFuelType(type);
+          screen.setState(7);
         }
-         //String str = "a87";
-        
-        //MouseInfo mouse = Greenfoot.getMouseInfo();
-        //str += chooseFuelType(mouse.getX(),mouse.getY());
-        //screen.setFuelType(str);// Add your action code here.
+       
     }
     public String getType(){
         
         String type = " ";
-        if (Greenfoot.mousePressed(this))
+        if (Greenfoot.mouseClicked(this))
         {
             
             MouseInfo mouse = Greenfoot.getMouseInfo();
@@ -46,19 +41,19 @@ public class GasGrade extends Actor
         return type;
     }
     public String chooseFuelType(int x, int y) {
-        if ( x < getX() -35)
+        if ( x < getX() -35 && y >getY() - 40 && y < getY() + 40)
        {
            return "87";
        }
-       else if( x > getX() -35 && x < getX() + 35)
+       else if( x > getX() -35 && x < getX() + 35 && y >getY() - 40 && y < getY() + 40)
        {
            return "89";
         }
-         else if( x > getX() + 35)
+         else if( x > getX() + 35 && y >getY() - 40 && y < getY() + 40)
        {
            return "91";
        }
-       return "test";
+       return " ";
     }
        
 }

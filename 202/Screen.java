@@ -14,11 +14,12 @@ public class Screen extends Actor
      */
      private Message message = new Message();
      private Keypad keypad;
+     private CreditCard creditCard;
      private GasGrade gasgrade;
      private String zipcode;
      private String fuelType;
      private int state;
-     private CreditCard creditCard;
+     private boolean mouseDown = false;
     public Screen() {
         GreenfootImage image = getImage();
         image.scale(300, 200);
@@ -50,11 +51,16 @@ public class Screen extends Actor
          chooseProceed();
         }
         if(state == 6){
-         chooseFuelType();
+         
+            chooseFuelType();
         }
        if(state == 7)
        {
            showFuelType();
+       }
+       if(state == 8)
+       {
+           showReceipt();
        }
         
     } 
@@ -93,6 +99,7 @@ public class Screen extends Actor
    
         keypad = getWorld().getObjects(Keypad.class).get(0);
         String str = "Oops,Wrong zipcode.\n Please enter again\n";
+        creditCard = getWorld().getObjects(CreditCard.class).get(0);
         setMessage(str);
         state = 2;
         if (zipcode != null && zipcode.length() <= 5) {
@@ -101,12 +108,12 @@ public class Screen extends Actor
             setMessage(str);
         }
         
-        if(keypad.getNum() == -5 && zipcode.length() == 5)
+        if(keypad.getNum() == -5 && creditCard.checkZipcode(zipcode))
         {
             state = 3;
         }
         
-        if(keypad.getNum() == -5 && zipcode.length() != 5)
+        if(keypad.getNum() == -5 && !creditCard.checkZipcode(zipcode))
         {
             state = 2;
             zipcode="";
@@ -162,19 +169,46 @@ public class Screen extends Actor
         keypad = getWorld().getObjects(Keypad.class).get(0);
         setMessage("Please choose fuel type!");
         state = 6;
-        MouseInfo mouse = Greenfoot.getMouseInfo();
+
+       gasgrade = getWorld().getObjects(GasGrade.class).get(0);
+       MouseInfo mouse = Greenfoot.getMouseInfo();
        
-       if( state == 6 && keypad.getNum() == -5)//mouse.getX() > gasgrade.getX() - 105 && mouse.getX() < gasgrade.getX() + 105)
+       if( state == 6 && mouseDown == false && Greenfoot.mousePressed(gasgrade) )
        {
            state = 7;
+           
+           mouseDown = true;
+        }
+          
        }
-    }
+       
     public void showFuelType()
     {
-        gasgrade = getWorld().getObjects(GasGrade.class).get(0);
-        String showType = "you have choosed #" + fuelType;
-        setMessage(showType);
         state = 7;
+        gasgrade = getWorld().getObjects(GasGrade.class).get(0);
+        
+        MouseInfo mouse = Greenfoot.getMouseInfo();
+       
+       
+        
+         if(Greenfoot.mousePressed(gasgrade))
+           {
+             fuelType = gasgrade.chooseFuelType(mouse.getX(),mouse.getY());
+             String showType = "you have choosed #" + fuelType;
+             setMessage(showType);
+             //state = 8;
+             mouseDown = false;
+             Greenfoot.delay(50);//pump code here
+             setState(8);
+           }
+        
+        
+    }
+    public void showReceipt()
+    {
+    state = 8;
+    String receipt = "print receipt?";
+    setMessage(receipt);
     }
     public void setZipcode(String str)
     {
