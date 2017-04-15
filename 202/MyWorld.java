@@ -27,6 +27,7 @@ public class MyWorld extends World
         addObject(new CreditCardSlot(), 310, 400);
         addObject(new Keypad(), 450, 400);
         addObject(new GasGrade(), 650, 400);
+        addObject(new GasPumper(), 130, 400);
         screen.welcome();
     }
 }
