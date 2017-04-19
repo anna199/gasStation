@@ -41,10 +41,8 @@ public class Screen extends Actor
         if (state == 3){ 
            needHelp();
         }
-   
        if (state == 4){
          helpInformation();
-        
         }
         if (state == 5){
            
@@ -62,6 +60,10 @@ public class Screen extends Actor
        {
            showReceipt();
        }
+       if(state == 9)
+       {
+           beep();
+       }
         
     } 
     public void setMessage (String str) 
@@ -69,31 +71,36 @@ public class Screen extends Actor
        message.setText(str);
        getWorld().addObject(message,400,160);
     }
+    
     public void welcome() {
         String str = "Welcome to Super 5 Gas Station" + "\n" +"Please insert card";
         setMessage(str);
         state = 0;
-        
+        if(zipcode != null){
+            state = 9;
+        }
     }
+    
     public void insertCreditCard()
     {
         keypad = getWorld().getObjects(Keypad.class).get(0);
         creditCard = getWorld().getObjects(CreditCard.class).get(0);
-        String str = "Credit card inserted" +"\n" + "Please enter zipcode\n";
-        setMessage(str);
-        state = 1;
-        //if (Greenfoot.mousePressed(Keypad.class)) {
-        if (zipcode != null && zipcode.length() <= 5) {
-            str = str + "Zipcode entered is "+ "\n";
-            str += zipcode;
-            setMessage(str);
-        }
-        //if (zipcode.length() == 5 && creditCard.checkZipcode(zipcode))
-       // {
+          String str = "Credit card inserted" +"\n" + "Please enter zipcode\n";
+          setMessage(str);
+          state = 1;
+     
+          //if (Greenfoot.mousePressed(Keypad.class)) {
+            if (zipcode != null && zipcode.length() <= 5) {
+                str = str + "Zipcode entered is "+ "\n";
+                str += zipcode;
+                setMessage(str);
+            }
+          //if (zipcode.length() == 5 && creditCard.checkZipcode(zipcode))
+          // {
             //selectGrade();
-        //}
-        
-    }
+          //}
+        }
+    
     public void wrongZipcode()
     {
    
@@ -185,11 +192,8 @@ public class Screen extends Actor
     public void showFuelType()
     {
         state = 7;
-        gasgrade = getWorld().getObjects(GasGrade.class).get(0);
-        
+        gasgrade = getWorld().getObjects(GasGrade.class).get(0);    
         MouseInfo mouse = Greenfoot.getMouseInfo();
-       
-       
         
          if(Greenfoot.mousePressed(gasgrade))
            {
@@ -201,8 +205,6 @@ public class Screen extends Actor
              Greenfoot.delay(50);//pump code here
              setState(8);
            }
-        
-        
     }
     public void showReceipt()
     {
@@ -234,5 +236,9 @@ public class Screen extends Actor
     {
         return fuelType;
     }
-    
+    public void beep() {
+        String str = "Beep!\n\nPlease insert credit card first\nand try again!";
+        setMessage(str);
+        state = 0;
+    }
 }
