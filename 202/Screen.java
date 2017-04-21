@@ -12,19 +12,23 @@ public class Screen extends Actor
      * Act - do whatever the screen wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-     private Message message = new Message();
-     private Keypad keypad;
-     private CreditCard creditCard;
-     private GasGrade gasgrade;
-     private String zipcode;
-     private String fuelType;
-     private int state;
-     private boolean mouseDown = false;
+    private Message message = new Message();
+    private Keypad keypad;
+    private CreditCard creditCard;
+    private GasGrade gasgrade;
+    private String zipcode;
+    private String fuelType;
+    private int state;
+    private boolean mouseDown = false;
+    private boolean isWashed;
+    private Price price; 
     public Screen() {
         GreenfootImage image = getImage();
         image.scale(300, 200);
        // String str = "Welcome to Super 5 Gas Station" + "\n" +"Please insert card";
         //setMessage(str);
+        this.isWashed = false;
+        this.price = new Price();
     }
     public void act() 
     {
@@ -64,7 +68,9 @@ public class Screen extends Actor
        {
            beep();
        }
-        
+       if (state == 10) {
+           chooseWashOrNot();
+       }
     } 
     public void setMessage (String str) 
     {
@@ -164,7 +170,8 @@ public class Screen extends Actor
          state = 5; 
            if(keypad.getNum() == -5)//proceed
            {
-               state = 6;
+               //state = 6;
+               setState(10); // proceed to choose car wash
            }
            else if(keypad.getNum() == -3)//home
            {
@@ -198,7 +205,7 @@ public class Screen extends Actor
          if(Greenfoot.mousePressed(gasgrade))
            {
              fuelType = gasgrade.chooseFuelType(mouse.getX(),mouse.getY());
-             String showType = "you have choosed #" + fuelType;
+             String showType = "you have chosen #" + fuelType;
              setMessage(showType);
              //state = 8;
              mouseDown = false;
@@ -236,9 +243,31 @@ public class Screen extends Actor
     {
         return fuelType;
     }
+    /**
+     * Only allow get, no setter for outside classes
+     */
+    public boolean getIsWashed() {
+        return this.isWashed;
+    }
     public void beep() {
         String str = "Beep!\n\nPlease insert credit card first\nand try again!";
         setMessage(str);
         state = 0;
     }
+    private void chooseWashOrNot() {
+        String questionary = "Would you like to wash your car? \n Discount will be applied!";
+        setMessage(questionary);
+        setState(10);
+        keypad = getWorld().getObjects(Keypad.class).get(0);
+        if (keypad.getNum() == -1) {
+            this.isWashed = true;
+            String resultString = Price.DISCOUNT * 100 + "% will applied to gas expense!";
+            setMessage(resultString);
+            Greenfoot.delay(50);
+            setState(6);
+        } else if (keypad.getNum() == -2) {
+            setState(6);// after choosing car wash, continue to choose fuel type
+        }     
+    }
+    
 }
