@@ -212,7 +212,7 @@ public class Screen extends Actor
         if(Greenfoot.mousePressed(gasgrade))
         {
 			fuelType = gasgrade.chooseFuelType(mouse.getX(),mouse.getY());
-			String showType = " you have chosen #" + state +"\n the pumper is ready.\n please lift the pumper to start";
+			String showType = " you have chosen #" + fuelType +"\n the pumper is ready.\n please lift the pumper to start";
 			setMessage(showType);
 			mouseDown = false;
 			//Greenfoot.delay(50);//pump code here
@@ -234,7 +234,9 @@ public class Screen extends Actor
     public void showReceipt()
     {
 		state = 8;
-		String receipt = "You pumped " + gaspumper.getPumpTime() + "sec. \n print receipt?";
+		String receipt = "You pumped " + gaspumper.getPumpTime() + " sec."; 
+		receipt += "\n total cost is $" + price.calculatePrice(gaspumper.getPumpTime(),Integer.parseInt(fuelType),isWashed);
+		receipt += "\n print receipt?";
 		setMessage(receipt);
     }
     public void setZipcode(String str)
