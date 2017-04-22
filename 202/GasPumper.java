@@ -13,47 +13,57 @@ public class GasPumper extends Actor
     private boolean isPumpStarted;
     private long startPumpTime;
     private long endPumpTime;
+    private boolean isPumpActive;
     /**
      * Constructor for objects of class GassPumper
      */
     public GasPumper()
     {
-        System.out.println("test1");
-       int mouseX, mouseY ;
+       int mouseX, mouseY;
        isPumpStarted = false;
-        
+       isPumpActive = false;
     }
     
     public void act() 
     {
+		/*
         if (Greenfoot.mousePressed(this)) {
-            System.out.println("test");
+            
             //pumper image should be disappear, which meanas it's pumping
             //todo: show another image?
-            if(!isPumpStarted){
+            if(!isPumpActive){
+                //maybe alart "dont touch me!" :p
+            } else if(!isPumpStarted){
                 startPump();
                 isPumpStarted = true;
             } else {
                 endPump();
+				isPumpActive = false;
                 pumperTimeUsed = (endPumpTime-startPumpTime)/1000;
                 System.out.println("you pumped " + pumperTimeUsed + " sec");
-                /*
-                System.out.println(startPumpTime);
-                System.out.println(endPumpTime);
-                System.out.println(pumperTimeUsed);
-                */
             }
         }
+		*/
     }
     
-    private void startPump(){
+    public void startPump(){
+		isPumpStarted = true;
         this.startPumpTime =  System.currentTimeMillis();
     }
-    
-    private void endPump(){
+    public void endPump(){
         this.endPumpTime =  System.currentTimeMillis();
     }
-
+	public void activePumper(){
+		this.isPumpActive = true;
+	}
+	public boolean isStarted(){
+		return isPumpStarted;
+	}
+	public long getPumpTime(){
+	    pumperTimeUsed = (endPumpTime-startPumpTime)/1000;
+	    return pumperTimeUsed;
+	}
+	
     /**
      * An example of a method - replace this comment with your own
      * 
