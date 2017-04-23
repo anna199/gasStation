@@ -23,6 +23,8 @@ public class Screen extends Actor
     private boolean mouseDown = false;
     private boolean isWashed;
     private Price price; 
+    private boolean soundHasPlayed = false;
+    GreenfootSound sound = new GreenfootSound("sounds/beep.wav");
     public Screen() {
         GreenfootImage image = getImage();
         image.scale(300, 200);
@@ -270,6 +272,11 @@ public class Screen extends Actor
         return this.isWashed;
     }
     public void beep() {
+        if (!soundHasPlayed)
+        {
+            sound.play();
+            soundHasPlayed = true; 
+        }
         String str = "Beep!\n\nPlease insert credit card first\nand try again!";
         setMessage(str);
         state = 0;
