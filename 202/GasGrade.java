@@ -41,15 +41,15 @@ public class GasGrade extends Actor
         return type;
     }
     public String chooseFuelType(int x, int y) {
-        if ( x < getX() -35 && y >getY() - 40 && y < getY() + 40)
+        if ( x < getX() -36 && y >getY() - 80 && y < getY() + 80)
        {
            return "87";
        }
-       else if( x > getX() -35 && x < getX() + 35 && y >getY() - 40 && y < getY() + 40)
+       else if( x > getX() -36 && x < getX() + 34 && y >getY() - 80 && y < getY() + 80)
        {
            return "89";
         }
-         else if( x > getX() + 35 && y >getY() - 40 && y < getY() + 40)
+         else if( x > getX() + 34 && y >getY() - 80 && y < getY() + 80)
        {
            return "91";
        }
