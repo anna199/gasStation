@@ -53,7 +53,7 @@ public class GasGrade extends Actor
        {
            return "91";
        }
-       return " ";
+       return "N/A";
     }
        
 }

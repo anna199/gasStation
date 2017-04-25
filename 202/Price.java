@@ -31,6 +31,15 @@ public class Price
      */
     public double calculatePrice(double time, int fuelType, boolean isWashed) {
         double temp = (time / 60) * PUMP_SPEED * fuelPriceMap.get(fuelType);
-        return isWashed ? temp * DISCOUNT : temp;
+        double temp1 = isWashed ? temp * DISCOUNT : temp;
+        return round(temp1,2);
+    }
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+    
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
     }
 }

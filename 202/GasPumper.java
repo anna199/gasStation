@@ -14,6 +14,7 @@ public class GasPumper extends Actor
     private long startPumpTime;
     private long endPumpTime;
     private boolean isPumpActive;
+    private Screen screen;
     /**
      * Constructor for objects of class GassPumper
      */
@@ -48,6 +49,8 @@ public class GasPumper extends Actor
     
     public void startPump(){
 		isPumpStarted = true;
+		screen = getWorld().getObjects(Screen.class).get(0);
+		screen.setMessage("Pumping started, \n Click again to stop.");
         this.startPumpTime =  System.currentTimeMillis();
     }
     public void endPump(){
