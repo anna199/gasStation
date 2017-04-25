@@ -16,7 +16,7 @@ public class Screen extends Actor
     private Keypad keypad;
     private CreditCard creditCard;
     private GasGrade gasgrade;
-	private GasPumper gaspumper;
+    private GasPumper gaspumper;
     private String zipcode;
     private String fuelType;
     private int state;
@@ -24,6 +24,7 @@ public class Screen extends Actor
     private boolean isWashed;
     private Price price; 
     private boolean soundHasPlayed = false;
+    private boolean isReciptPrint = false;
     GreenfootSound sound = new GreenfootSound("sounds/beep.wav");
     public Screen() {
         GreenfootImage image = getImage();
@@ -46,10 +47,10 @@ public class Screen extends Actor
             wrongZipcode();
         }
         if (state == 3){ 
-			needHelp();
+            needHelp();
         }
         if (state == 4){
-			helpInformation();
+            helpInformation();
         }
         if (state == 5){
            
@@ -60,11 +61,11 @@ public class Screen extends Actor
         }
         if(state == 7)
         {
-			showFuelType();
+            showFuelType();
         }
         if(state == 8)
         {
-			showReceipt();
+            showReceipt();
         }
         if(state == 9)
         {
@@ -73,9 +74,12 @@ public class Screen extends Actor
         if (state == 10) {
             chooseWashOrNot();
         }
-		if (state == 11) {
-			pumpingGas();
-		}
+        if (state == 11) {
+            pumpingGas();
+        }
+        if (state == 12) {
+            printRecipt();
+        }
     } 
     public void setMessage (String str) 
     {
@@ -204,42 +208,58 @@ public class Screen extends Actor
     public void showFuelType()
     {
         if(state==6){
-			state = 7;
-		} else {
-			state = 11;
-		}
+            state = 7;
+        } else {
+            state = 11;
+        }
         gasgrade = getWorld().getObjects(GasGrade.class).get(0);    
         MouseInfo mouse = Greenfoot.getMouseInfo();
         
         if(Greenfoot.mousePressed(gasgrade))
         {
-			fuelType = gasgrade.chooseFuelType(mouse.getX(),mouse.getY());
-			String showType = " you have chosen #" + fuelType +"\n the pumper is ready.\n please lift the pumper to start";
-			setMessage(showType);
-			mouseDown = false;
-			//Greenfoot.delay(50);//pump code here
+            fuelType = gasgrade.chooseFuelType(mouse.getX(),mouse.getY());
+            String showType = " you have chosen #" + fuelType +"\n the pumper is ready.\n please lift the pumper to start";
+            setMessage(showType);
+            mouseDown = false;
+            //Greenfoot.delay(50);//pump code here
         }
     }
-	public void pumpingGas(){
-		gaspumper = getWorld().getObjects(GasPumper.class).get(0);
-		if(Greenfoot.mousePressed(gaspumper) && !gaspumper.isStarted()){
-			//let's pump
-			//System.out.println("let's pump");
-			gaspumper.startPump();
-		} else if(Greenfoot.mousePressed(gaspumper) && gaspumper.isStarted()){
-			//stop pumping, show time & cost.
-			//System.out.println("stop pumping, show time & cost.");
-			gaspumper.endPump();
-			state = 8;
-		}
-	}
+    public void pumpingGas(){
+        gaspumper = getWorld().getObjects(GasPumper.class).get(0);
+        if(Greenfoot.mousePressed(gaspumper) && !gaspumper.isStarted()){
+            //let's pump
+            //System.out.println("let's pump");
+            gaspumper.startPump();
+        } else if(Greenfoot.mousePressed(gaspumper) && gaspumper.isStarted()){
+            //stop pumping, show time & cost.
+            //System.out.println("stop pumping, show time & cost.");
+            gaspumper.endPump();
+            state = 8;
+        }
+    }
     public void showReceipt()
     {
-		state = 8;
-		String receipt = "You pumped " + gaspumper.getPumpTime() + " sec."; 
-		receipt += "\n total cost is $" + price.calculatePrice(gaspumper.getPumpTime(),Integer.parseInt(fuelType),isWashed);
-		receipt += "\n print receipt?";
-		setMessage(receipt);
+        state = 8;
+        String receipt = "You pumped " + gaspumper.getPumpTime() + " sec."; 
+        double cost = price.calculatePrice(gaspumper.getPumpTime(),Integer.parseInt(fuelType),isWashed);
+        receipt += "\n total cost is $" + cost;
+        receipt += "\n print receipt?";
+        setMessage(receipt);
+        if(keypad.getNum() == -1)//YES
+        {
+            String reciptResult = "This is your recipt:\n";
+            reciptResult += "Gas grade: #" + fuelType +"\n";
+            reciptResult += "Time used: " + gaspumper.getPumpTime() +" sec\n";
+            reciptResult += "Money cost: $" + cost +"\n";
+            System.out.println(reciptResult);
+            isReciptPrint = true;
+            state = 12;
+        }
+        else if(keypad.getNum() == -2)//NO
+        {
+            isReciptPrint = false;
+            state = 12;
+        }
     }
     public void setZipcode(String str)
     {
@@ -295,6 +315,12 @@ public class Screen extends Actor
         } else if (keypad.getNum() == -2) {
             setState(6);// after choosing car wash, continue to choose fuel type
         }     
+    }
+    public void printRecipt(){
+        if(isReciptPrint)
+            setMessage("Your recipt is printed in Console\nThank you!\nBye!");
+        else
+            setMessage("Thank you!\nBye!");
     }
     
 }
