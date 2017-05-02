@@ -28,7 +28,7 @@ public class CreditCardSlot extends Actor
             current_CreditCard = (CreditCard) getCreditCard;
             World world = getWorld();
             screen = world.getObjects(Screen.class).get(0);
-            screen.insertCreditCard();
+            screen.setState(State.INSERTCREDITCARD);
             
             world.removeObject(getCreditCard);
             Greenfoot.delay(100);

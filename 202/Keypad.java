@@ -14,9 +14,10 @@ public class Keypad extends Actor
      */
    private Screen screen;
    private CreditCard creditCard;
-    public Keypad() {
+    public Keypad(Screen screen) {
         GreenfootImage image = getImage();
         image.scale(150, 150);
+        this.screen = screen;
     }
     public int getNum(){
         int num = 0;
@@ -49,19 +50,19 @@ public class Keypad extends Actor
               else if(num == -3)
               {
                   str = "";
-                  screen.setState(0);//cancel
+                  screen.setState(State.WELCOME);//cancel
               }
-              else if(num == -5 && screen.getState() == 1)
+              else if(num == -5 && screen.getState() == State.INSERTCREDITCARD)
               {
                   if(str.length() == 5)
                   {
                       if(creditCard.checkZipcode(str))
                       {
-                          screen.setState(3);
+                          screen.setState(State.NEEDHELP);
                       }
                       else if(!creditCard.checkZipcode(str))
                       {   str="";
-                          screen.setState(2);
+                          screen.setState(State.WRONGZIPCODE);
                       }
                   }
                   else if(str.length() != 5)

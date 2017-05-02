@@ -21,12 +21,12 @@ public class GasGrade extends Actor
     public void act() 
     {
         
-        if (Greenfoot.mousePressed(this))
+       /* if (Greenfoot.mousePressed(this))
         {
           //MouseInfo mouse = Greenfoot.getMouseInfo();
           screen = getWorld().getObjects(Screen.class).get(0);
           screen.setState(7);
-        }
+        }*/
        
     }
     public String getType(){
