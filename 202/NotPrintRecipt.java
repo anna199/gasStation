@@ -24,6 +24,6 @@ public class NotPrintRecipt extends Actor implements ReciptState
     public void printRecipt()
     {
         // put your code here
-         Screen.setShowText("Thank you!\nBye!");
+         Screen.getInstance().setShowText("Thank you!\nBye!");
     }
 }

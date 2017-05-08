@@ -26,16 +26,16 @@ public class CarWash extends ScreenState
     public void chooseWashOrNot() {
         String questionary = "Would you like to wash your car? \n Discount will be applied!";
         screen.setMessage(questionary);
-        screen.setState(State.CARWASH);
+        //screen.setState(State.CARWASH);
         
         if (keypad.getNum() == -1) {
-            screen.setIsWashed(true);
+           // screen.setIsWashed(true);
             String resultString = Price.DISCOUNT * 100 + "% will applied to gas expense!";
            screen.setMessage(resultString);
             Greenfoot.delay(50);
-            screen.setState(State.FUELTYPE);
+           // screen.setState(State.FUELTYPE);
         } else if (keypad.getNum() == -2) {
-            screen.setState(State.FUELTYPE);// after choosing car wash, continue to choose fuel type
+           // screen.setState(State.FUELTYPE);// after choosing car wash, continue to choose fuel type
         }     
     }
 }

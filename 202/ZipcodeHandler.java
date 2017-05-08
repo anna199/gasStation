@@ -1,4 +1,7 @@
-import greenfoot.*; 
+import greenfoot.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.*;
 /**
  * Write a description of class ZipcodeHandler here.
  * 
@@ -13,11 +16,13 @@ public class ZipcodeHandler extends ScreenState
      * Constructor for objects of class ZipcodeHandler
      */
     private CreditCard creditCard;
-    private String zipcode = null;
-    public ZipcodeHandler(Screen screen)
+    private Screen screen = Screen.getInstance();
+    private Zipcode zipcode = Zipcode.getInstance();
+    private StationState state = StationState.getInstance();
+    public ZipcodeHandler()
     {
-        this.screen = screen;
-        keypad = screen.getWorld().getObjects(Keypad.class).get(0);
+        //this.screen = screen;
+        //keypad = screen.getWorld().getObjects(Keypad.class).get(0);
         creditCard =screen.getWorld().getObjects(CreditCard.class).get(0);
     }
 
@@ -28,20 +33,19 @@ public class ZipcodeHandler extends ScreenState
      * @return     the sum of x and y 
      */
   
-    public void insertCreditCard()
+    public void act()
     {
-        
-        Screen.setShowText("Credit card inserted" +"\n" + "Please enter zipcode\n");
-          String str = "Credit card inserted" +"\n" + "Please enter zipcode\n";
-          screen.setMessage();
-          state = State.INSERTCREDITCARD;
-          screen.setState(state);
-          zipcode = Screen.getZipcode();
-            if ( zipcode != null && zipcode.length() <= 5) {
+       
+          
+          //state = State.INSERTCREDITCARD;
+          //screen.setState(state);
+          zipcode = Zipcode.getInstance();
+            if ( zipcode != null && zipcode.getZipcode().length() <= 5 && state.canEnterZip()) {
+                String str = "Credit card inserted" +"\n" + "Please enter zipcode\n";
                 str = str + "Zipcode entered is "+ "\n";
-                str += zipcode;
-                Screen.setShowText(str);
-                screen.setMessage();
+                str += zipcode.getZipcode();
+                screen.setMessage(str);
+                //screen.setMessage();
             }
          
         }
@@ -51,12 +55,13 @@ public class ZipcodeHandler extends ScreenState
   
         String str = "Oops, Wrong zipcode.\n Please enter again\n";
         screen.setMessage(str);
-        Greenfoot.delay(5);
-         zipcode="";
-            screen.setZipcode(zipcode);
+        Greenfoot.delay(10);
+  
+        Zipcode.getInstance().clear();
+         
             
-        state = State.INSERTCREDITCARD;
-        screen.setState(state);
+        //state = State.INSERTCREDITCARD;
+        //screen.setState(state);
         
        /* if (zipcode != null && zipcode.length() <= 5) {
             str = str + "Zipcode entered is "+ "\n";

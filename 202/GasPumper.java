@@ -14,7 +14,8 @@ public class GasPumper extends Actor
     private long startPumpTime;
     private long endPumpTime;
     private boolean isPumpActive;
-    private Screen screen;
+    private Screen screen = Screen.getInstance();
+    private  StationState state = StationState.getInstance();
     /**
      * Constructor for objects of class GassPumper
      */
@@ -27,12 +28,12 @@ public class GasPumper extends Actor
     
     public void act() 
     {
-		/*
-        if (Greenfoot.mousePressed(this)) {
+		
+        if (Greenfoot.mousePressed(this) && state.canPump()) {
             
             //pumper image should be disappear, which meanas it's pumping
             //todo: show another image?
-            if(!isPumpActive){
+            if(!state.canPump()){
                 //maybe alart "dont touch me!" :p
             } else if(!isPumpStarted){
                 startPump();
@@ -41,15 +42,21 @@ public class GasPumper extends Actor
                 endPump();
 				isPumpActive = false;
                 pumperTimeUsed = (endPumpTime-startPumpTime)/1000;
-                System.out.println("you pumped " + pumperTimeUsed + " sec");
+                screen.setMessage("you pumped " + pumperTimeUsed + " sec" + "\nDo you need car wash?");
+               
+                state.moveToNextState();
+                Greenfoot.delay(100);
+                Price.getInstance().setTime(pumperTimeUsed);
+                //screen.setMessage("would you like to print your receipt?");
+                
             }
         }
-		*/
+		
     }
     
     public void startPump(){
 		isPumpStarted = true;
-		screen = getWorld().getObjects(Screen.class).get(0);
+		//screen = getWorld().getObjects(Screen.class).get(0);
 		screen.setMessage("Pumping started, \n Click again to stop.");
         this.startPumpTime =  System.currentTimeMillis();
     }

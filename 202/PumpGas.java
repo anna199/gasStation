@@ -33,9 +33,9 @@ public class PumpGas extends ScreenState
             //stop pumping, show time & cost.
             //System.out.println("stop pumping, show time & cost.");
             gaspumper.endPump();
-            state = State.SHOWRECIPT;
-            screen.setState(state);
-            screen.setPumpTime(gaspumper.getPumpTime());
+            //state = State.SHOWRECIPT;
+            //screen.setState(state);
+            //screen.setPumpTime(gaspumper.getPumpTime());
         }
     }
     public GasPumper getGasPumper() {

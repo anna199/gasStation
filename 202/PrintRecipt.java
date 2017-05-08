@@ -14,6 +14,6 @@ public class PrintRecipt extends Actor implements ReciptState
    public PrintRecipt() {
     }
    public void printRecipt(){
-       Screen.setShowText("Your recipt is printed in Console\nThank you!\nBye!");
+       Screen.getInstance().setShowText("Your recipt is printed in Console\nThank you!\nBye!");
     }
 }

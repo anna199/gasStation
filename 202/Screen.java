@@ -1,13 +1,16 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.*;
 
 public class Screen extends Actor
 {
-   
+    
     private Message message = new Message();
-    private static String showText ="";
+    private String showText ="START";
     private Keypad keypad;
+    //private List<Button> Buttons;
+    
     private CreditCard creditCard;
-    private static String zipcode = null;
+    //private static String zipcode = null;
     private String fuelType;
     private static State state;
     private boolean isWashed;
@@ -21,34 +24,58 @@ public class Screen extends Actor
     private ShowRecipt showRecipt;
     private ReciptState reciptState;
     private long gasPumpTime;
-    GreenfootSound sound = new GreenfootSound("sounds/beep.wav");
+    private static StationState stationState = StationState.getInstance();
+    /**
+     * Constructor for objects of class Zipcode
+     */
+    private static Screen singleton;
+
     
-    public Screen() {
+    private Screen() {
+        showText = "";
         GreenfootImage image = getImage();
         image.scale(300, 200);
-       zipcode = null;
+    }
+    
+    public static Screen getInstance() {
+        if (singleton == null) {
+            singleton = new Screen();
+        }
+        return singleton;
+    }
+   
+    
+    
+    /*public Screen() {
+        GreenfootImage image = getImage();
+        image.scale(300, 200);
+        //zipcode = null;
         this.isWashed = false;
         
-    }
+    }*/
     public void act() 
     {
-        // Add your action code here.
-        zipcodeHandler = new ZipcodeHandler(this);
+        setMessage ();
+        
+        //setMessage();// Add your action code here.
+        /*zipcodeHandler = new ZipcodeHandler(this);
         needHelp = new NeedHelp(this);
         selectFuelType = new SelectFuelType(this);
         carWash = new CarWash(this);
-        pumpGas = new PumpGas(this);
-        showRecipt = new ShowRecipt(this);
-       if (state == State.WELCOME){
-            (new Welcome(this)).run();
-        }
-        if (state == State.INSERTCREDITCARD) {
-            zipcodeHandler.insertCreditCard();
-        }
-        if (state == State.WRONGZIPCODE) {
+        pumpGas = new PumpGas(this);*/
+        //showRecipt = new ShowRecipt(this);
+        
+        //if (stationState.canEnterZip()) {
+            //zipcodeHandler.insertCreditCard();
+            //notifyAllObservers();
+        //}
+
+    }
+        /*if (state == State.WRONGZIPCODE) {
            zipcodeHandler.wrongZipcode();
-        }
-        if (state == State.NEEDHELP){ 
+           notifyAllObservers();
+        }*/
+        /*if (state == State.NEEDHELP){ 
             needHelp.needHelp();
         }
         if (state == State.HELPINFO){
@@ -60,6 +87,7 @@ public class Screen extends Actor
         }
         if(state == State.FUELTYPE){
             selectFuelType.chooseFuelType();
+            notifyAllObservers();
         }
         if(state == State.SHOWFUEL)
         {
@@ -86,35 +114,30 @@ public class Screen extends Actor
             reciptState.printRecipt();
             setMessage();
         }
-    }
+    }*/
     public void setMessage (String str) 
     {
-       message.setText(str);
-       getWorld().addObject(message,400,160);
+       showText = str;
     }
     public void setMessage () 
     {
        message.setText(showText);
        getWorld().addObject(message,400,160);
     }
-    public static void setShowText(String str)
+    public void setShowText(String str)
     {
-        showText = str;
+        this.showText = str;
     }
-    public static void setState(State s) {
+    /*public static void setState(State s) {
         state = s;
+    
     }
-    public static String getZipcode() {
-        return zipcode;
-    }
+  
      public State getState()
     {
         return state;
     }
-     public void setZipcode(String str)
-    {
-        zipcode = str;
-    } 
+   
        
      public void setFuelType(String str)
     {
@@ -130,7 +153,7 @@ public class Screen extends Actor
      public void setIsWashed(boolean wash) {
        this.isWashed = wash;
     }
-   public void beep() {
+  /* public void beep() {
         if (!soundHasPlayed)
         {
             sound.play();
@@ -140,8 +163,8 @@ public class Screen extends Actor
         setShowText(str);
         setMessage();
         state = State.WELCOME;
-    }
-    public void setExit()
+    }*/
+    /*public void setExit()
     {
     ExitCommand exitCommand = new ExitCommand();
         Controller controller = new Controller();
@@ -158,4 +181,16 @@ public class Screen extends Actor
     public void setPumpTime(long time){
         this.gasPumpTime = time;
     }
+    
+    public void attach(Button button){
+        Buttons.add(button);
+    }
+    
+    public void notifyAllObservers(){
+        
+        for(Button B : Buttons)
+        {
+            B.execute(this.getState());
+        }
+    }*/
 }

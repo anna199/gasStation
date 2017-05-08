@@ -14,6 +14,7 @@ public class CreditCardSlot extends Actor
      */
     private Screen screen;
     private CreditCard current_CreditCard;
+    private StationState stationstate = StationState.getInstance();
     public CreditCardSlot() {
         GreenfootImage image = getImage();
         image.scale(100, 150);
@@ -27,10 +28,9 @@ public class CreditCardSlot extends Actor
         {
             current_CreditCard = (CreditCard) getCreditCard;
             World world = getWorld();
-            screen = world.getObjects(Screen.class).get(0);
-            screen.setState(State.INSERTCREDITCARD);
-            
+            stationstate.moveToNextState();
             world.removeObject(getCreditCard);
+            Screen.getInstance().setMessage("Credit Card Inserted\nPlease type in Zipcode");
             Greenfoot.delay(100);
             world.addObject(getCreditCard,100, 100);
         }

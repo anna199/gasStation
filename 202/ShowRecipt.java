@@ -32,7 +32,7 @@ public class ShowRecipt extends ScreenState
      */
     public void showReceipt()
     {
-        long time = screen.getPumpTime();
+        /*long time = screen.getPumpTime();
         state = State.SHOWRECIPT;
         String receipt = "You pumped " + time + " sec."; 
         fuelType = screen.getFuelType();
@@ -51,12 +51,12 @@ public class ShowRecipt extends ScreenState
             state = State.PRINTRECIPT;
             screen.setState(state);
             
-        }
-        else if(keypad.getNum() == -2)//NO
+        }*/
+        /*else if(keypad.getNum() == -2)//NO
         {
             screen.setPrintState(notPrintRecipt);
             state = State.PRINTRECIPT;
             screen.setState(state);
-        }
+        }*/
     }
 }

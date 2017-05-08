@@ -24,7 +24,7 @@ public class Keypad extends Actor
         if (Greenfoot.mousePressed(this))
         {
             MouseInfo mouse = Greenfoot.getMouseInfo();
-            num = checkEnteredNum(mouse.getX(),mouse.getY());
+            //num = checkEnteredNum(mouse.getX(),mouse.getY());
         }
         return num;
     }
@@ -35,9 +35,9 @@ public class Keypad extends Actor
           MouseInfo mouse = Greenfoot.getMouseInfo();
           screen = getWorld().getObjects(Screen.class).get(0);
           creditCard = getWorld().getObjects(CreditCard.class).get(0);
-          int num = checkEnteredNum(mouse.getX(),mouse.getY());
-          String str = screen.getZipcode();
-          if (str != null) { 
+          //int num = checkEnteredNum(mouse.getX(),mouse.getY());
+          String str = Zipcode.getInstance().getZipcode();
+          /*if (str != null) { 
               if(num >= 0)
               {
                   if(str.length() < 5)
@@ -50,9 +50,9 @@ public class Keypad extends Actor
               else if(num == -3)
               {
                   str = "";
-                  screen.setState(State.WELCOME);//cancel
-              }
-              else if(num == -5 && screen.getState() == State.INSERTCREDITCARD)
+                  //screen.setState(State.WELCOME);//cancel
+              }*/
+              /*else if(num == -5 && screen.getState() == State.INSERTCREDITCARD)
               {
                   if(str.length() == 5)
                   {
@@ -70,17 +70,17 @@ public class Keypad extends Actor
                       //str = "";
                       //screen.setState(2);//enter again
                       
-                   }
+                   }*/
               }
           }
-          else{
-            str = ""+num;
+          //else{
+            //str = ""+num;
           }
-           screen.setZipcode(str);
-        }
-    }
+          // Zipcode.getInstance().update(str);
+        //}
+    //}
  
-    public int checkEnteredNum(int x, int y) {
+    /*public int checkEnteredNum(int x, int y) {
         if ( x < getX() - 35  && y < getY() - 35) {
             return 1;
         }
@@ -130,5 +130,5 @@ public class Keypad extends Actor
             return -6; //DEBIT
        }
        return -7;
-    }
-}
+    }*/
+

@@ -19,7 +19,7 @@ public class NeedHelp extends ScreenState
     public void needHelp()
     {
         screen.setMessage("Need Help?\nYes      No");
-        state = State.NEEDHELP;
+        /*state = State.NEEDHELP;
             if(keypad.getNum() == -1)//Yes
             {
                    state = State.HELPINFO;//show help information  
@@ -28,13 +28,13 @@ public class NeedHelp extends ScreenState
            else if(keypad.getNum() == -2)//No
            {
                   state = State.PROCEDE;//proceed   
-           }
-           screen.setState(state);
+           }*/
+           //screen.setState(state);
     }
     public void helpInformation()
     {
        screen.setMessage("Help information----------");
-       state = State.HELPINFO;
+       /*state = State.HELPINFO;
            if(keypad.getNum() == -5)//proceed
            { 
                   state = State.FUELTYPE;
@@ -44,12 +44,12 @@ public class NeedHelp extends ScreenState
            {
                   state = State.WELCOME;
                   screen.setState(state);
-           } 
+           } */
     }
      public void chooseProceed()
     {
          screen.setMessage("press enter to proceed\npress cancel back to pause");
-         state = State.PROCEDE; 
+         /*state = State.PROCEDE; 
            if(keypad.getNum() == -5)//proceed
            {
                state = State.CARWASH;
@@ -59,6 +59,6 @@ public class NeedHelp extends ScreenState
            {
                state = State.WELCOME;
                screen.setState(state);
-           }
+           }*/
     }
 }

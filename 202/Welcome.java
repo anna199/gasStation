@@ -1,3 +1,4 @@
+import greenfoot.*;
 /**
  * Write a description of class Welcome here.
  * 
@@ -11,10 +12,14 @@ public class Welcome extends ScreenState
     /**
      * Constructor for objects of class Welcome
      */
-    public Welcome(Screen screen)
+    private boolean soundHasPlayed = false;
+    GreenfootSound sound = new GreenfootSound("sounds/beep.wav");
+    private StationState stationState = StationState.getInstance();
+    private Zipcode zipcode = Zipcode.getInstance();
+    private Screen screen = Screen.getInstance();
+    public Welcome()
     {
-        state = State.WELCOME;
-        this.screen = screen;
+        this.state = stationState.getInitState();
     }
 
     /**
@@ -25,15 +30,24 @@ public class Welcome extends ScreenState
      */
     public void run()
     {
-        Screen.setShowText("Welcome to Super 5 Gas Station" + "\n" +"Please insert card");
-        screen.setMessage();
-        if (Screen.getZipcode() != null) {
-            state = state.BEEP;
+       new InitState(stationState);
+        this.screen.setMessage("Welcome to Super 5 Gas Station" + "\n" +"Please insert card");
+        if (zipcode.getZipcode()!= null) {
+            beep();
         }
-        setState();
+    
+       
     }
-    public void setState()
-    {
-        Screen.setState(state);
+    
+    public void beep() {
+
+        if (!soundHasPlayed)
+        {
+            sound.play();
+            soundHasPlayed = true; 
+        }
+        String str = "Beep!\n\nPlease insert credit card first\nand try again!";
+        this.screen.setShowText(str);
+        this.screen.setMessage();
     }
 }

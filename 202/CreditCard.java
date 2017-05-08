@@ -33,6 +33,7 @@ public class CreditCard extends Actor
     }
     public boolean checkZipcode(String str)
     {
+        //System.out.format("'%s' ? '%s'\n", str, zipcode);
         return str.equals(zipcode);
     }
 }
