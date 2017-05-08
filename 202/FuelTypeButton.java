@@ -18,7 +18,6 @@ public class FuelTypeButton extends Button implements Buttons
     private GreenfootImage image;
     private String type;
     private Screen screen = Screen.getInstance();;
-    private StationState state = StationState.getInstance();
 
     public FuelTypeButton (String label) {
         // set value of the button
@@ -29,7 +28,6 @@ public class FuelTypeButton extends Button implements Buttons
         image = new GreenfootImage(size, size);
         image.setTransparency(0);
         setImage(image);
-
     }
 
     /**
@@ -39,12 +37,12 @@ public class FuelTypeButton extends Button implements Buttons
     public String getNumber() 
     {
         if(this.Value.equals("GAS0")) {
-            return "89";
+            return "87";
         }
         else if(this.Value.equals("GAS1"))
-            return "91";
+            return "89";
         else if(this.Value.equals("GAS2"))
-            return "93";
+            return "91";
         return "";
         // Add your action code here.
     } 
@@ -52,7 +50,7 @@ public class FuelTypeButton extends Button implements Buttons
     public void act()
     {
 
-        if(!state.canEnterGasType()) {
+        if(!stationstate.canEnterGasType()) {
             // make beep
             //state.currentState();
             return;
@@ -66,7 +64,7 @@ public class FuelTypeButton extends Button implements Buttons
             screen.setMessage("You have choosed  " + getNumber() +"\nPlease remove the pump");
             //Greenfoot.delay(300);
             //screen.setMessage("please remove the pump");
-            state.moveToNextState();
+            stationstate.moveToNextState();
         }
     }  
 

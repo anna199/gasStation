@@ -16,7 +16,6 @@ public class FunctionButton extends Button implements Buttons
     private String help = "";
     private Screen screen = Screen.getInstance();
     private CreditCard creditcard;
-    private StationState stationstate = StationState.getInstance();
 
     private Zipcode zipcode = Zipcode.getInstance();
     public FunctionButton (String label) {

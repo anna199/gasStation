@@ -15,8 +15,6 @@ public class NumberButton extends Button implements Buttons
     private Screen screen = Screen.getInstance();
     private Zipcode zipcode = Zipcode.getInstance();
     private boolean soundHasPlayed = false;
-    
-    private StationState state = StationState.getInstance();
    
 
     public NumberButton (String label) {
@@ -69,7 +67,7 @@ public class NumberButton extends Button implements Buttons
 
     public void act()
     {
-        if(!state.canEnterZip()) {
+        if(!stationstate.canEnterZip()) {
             //beep();
             return;
         }
