@@ -13,13 +13,12 @@ public class FunctionButton extends Button implements Buttons
     private boolean isClicked = false;
     private GreenfootImage image;
     private String command = "";
+    private String help = "";
     private Screen screen = Screen.getInstance();
     private CreditCard creditcard;
     private StationState stationstate = StationState.getInstance();
-    
 
     private Zipcode zipcode = Zipcode.getInstance();
-    
     public FunctionButton (String label) {
         // set value of the button
         // this value will be repor to Observer when button is click
@@ -27,111 +26,171 @@ public class FunctionButton extends Button implements Buttons
         this.Value = label;
         this.size = size;
         image = new GreenfootImage(size, size);
-        //image.setColor(Color.RED);
-        //image.fillRect(0, 0, size, size);
         image.setTransparency(0);
         setImage(image);
-        //super.attach();
-    }/**
+        
+    }
+
+    /**
      * Act - do whatever the functionButtons wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-     public String getButton() 
+    public String getButton() 
     {
         if(this.Value.equals("30"))
-        return "Yes";//yes
+            return "Yes";//yes
         else if(this.Value.equals("31"))
-        return "No";//no
+            return "No";//no
         else if(this.Value.equals("32"))
-        return "Cancel";//canceal
+            return "Cancel";//canceal
         else if(this.Value.equals("03"))
-        return "Clear";//clear
+            return "Clear";//clear
         else if(this.Value.equals("23"))
-        return "Enter";//enter
+            return "Enter";//enter
         else if(this.Value.equals("33"))
-        return "Debit";//debit
+            return "Debit";//debit
         return "";
         // Add your action code here.
     } 
+
     public void act()
     {
         if (Greenfoot.mousePressed(this))
         { 
-          execute();}
-       
+            execute();
+        }
+
     }
+
     public String showValue()
-    {return this.Value;}
-    
-    
+    {
+        return this.Value;
+    }
+
     public void execute()
     {
-       
+
         if(stationstate.canEnterZip())
-        {
-            if(getButton() == "Enter")
+        {   
+            help += getButton();
+            System.out.println(help);
+            
+       
+            if(help.equals("Enter"))
             {
                 creditcard = getWorld().getObjects(CreditCard.class).get(0);
-     
+
                 String zip = zipcode.getZipcode();
-                    if(creditcard.checkZipcode(zip))
-                      {
-                          System.out.println("correct");
-                          stationstate.moveToNextState();
-                          screen.setMessage("Please choose gas type");
-         
-                      }
-                      else
-                      { 
-                          
-                          System.out.println("wrong");
-                          wrongZipcode();
-                      }
+                
+                if(creditcard.checkZipcode(zip))
+                {  
+                    screen.setMessage("Do you need help?\nYes      No");
+
+                    System.out.println("correct");
+
+                }
+                else
+                { 
+
+                    System.out.println("wrong");
+                    String str = "Oops, Wrong zipcode.\n Please enter again\n";
+                    screen.setMessage(str);
+                    help = "";
+                    Zipcode.getInstance().clear();
+                }
             }
-            
-            else if(getButton() == "Cancel")
-            {
-                Greenfoot.setWorld(new MyWorld());
-                //new Welcome().run();
-            }
-            else if(getButton() == "Clear")
+            else if(help.equals("Clear"))
             {
                 Zipcode.getInstance().remove();
+                String str = "Credit card inserted" +"\n" + "Please enter zipcode\n";
+                str = str + "Zipcode entered is "+ "\n";
+                str += zipcode.getZipcode();
+                screen.setMessage(str);
+                help = "";
             }
+            if(help.equals("Cancel"))
+            {
+                backToInit();
+            }
+            if(help.equals("Yes"))
+            {
+                screen.setMessage("Help information:\nXXXXXXXXXXXXXXXXXX\n\n\nPress Enter to Move\nPress Cancel to cancel process");
+     
+            }
+            if(help.equals("No"))
+            {
+                stationstate.moveToNextState();
+                screen.setMessage("Please choose fuel Type");
+            }
+            if(help.equals("EnterEnter"))
+                {
+                    stationstate.moveToNextState();
+                    screen.setMessage("Please choose fuel Type");
+                }
+            if(help.equals("EnterEnterCancel"))
+                {
+                    backToInit();
+                }
+
         }
+        
+
         if(stationstate.canPrintReceipt())
         {
-     
-           if(getButton() == "Yes")
-           {
-               Price.getInstance().setCarWash(true);
-               
-
-           }
-           else if (getButton() == "No")
-           {
-               Price.getInstance().setCarWash(false);
-           }
-          Greenfoot.delay(100);
-            screen.setMessage("would you like to print your receipt?");
+            command += getButton();
             if(getButton() == "Yes")
             {
-                screen.setMessage(String.valueOf(Price.getInstance().getPrice()));
+                Price.getInstance().setCarWash(true);
+                screen.setMessage("Print your receipt?");
             }
             else if (getButton() == "No")
             {
-                
+                Price.getInstance().setCarWash(false); 
+                screen.setMessage("Print your receipt?");
             }
-            
+            System.out.println(command);
+            if(command.equals("YesYes"))
+            {
+                System.out.println(command);
+                screen.setMessage("Thank for choosing \nSuper 5 gas station\nYour price is: " + String.valueOf(Price.getInstance().getPrice()) +"\nYour car wash code is :" + getCarWashCode(1000,9000));
+                stationstate.moveToNextState();
                
+            }
+            else if(command.equals("NoYes"))
+            {               
+                screen.setMessage("Thank for choosing \nSuper 5 gas station\nYour price is: " + String.valueOf(Price.getInstance().getPrice()));              
+               
+            }
+            else if(command.equals("NoNo") || command.equals("YesNo") )
+            {
+                screen.setMessage("Thank you for choosing us,Bye!");
+          
+            }
+                   
+       
         }
     }
-    
+
     public void wrongZipcode()
     {
         String str = "Oops, Wrong zipcode.\n Please enter again\n";
         Screen.getInstance().setMessage("");
-   
+
         Zipcode.getInstance().clear();
     }
+
+    public int getCarWashCode(int start,int end)
+    {
+        int normal = Greenfoot.getRandomNumber(end-start+1);
+        return normal+start;
+    }
+    public void backToInit()
+    {
+                    Greenfoot.setWorld(new MyWorld());
+                    screen.setMessage("Welcome to Super 5 Gas Station" + "\n" +"Please insert card");
+                    stationstate.setState(stationstate.getInitState());
+                    Zipcode.getInstance().clear();
+    }
+
 }
+

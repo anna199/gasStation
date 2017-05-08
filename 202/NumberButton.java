@@ -12,7 +12,9 @@ public class NumberButton extends Button implements Buttons
     private String Value;
     private boolean isClicked = false;
     private GreenfootImage image;
-    private Screen screen;
+    private Screen screen = Screen.getInstance();
+    private Zipcode zipcode = Zipcode.getInstance();
+    private boolean soundHasPlayed = false;
     
     private StationState state = StationState.getInstance();
    
@@ -23,12 +25,9 @@ public class NumberButton extends Button implements Buttons
         super(label);
         this.Value = label;
         this.size = size;
-        image = new GreenfootImage(this.size, this.size);
-        image.setColor(Color.YELLOW);
-        image.fillRect(0, 0, this.size, this.size);
-        //image.setTransparency(0);
+        image = new GreenfootImage(size, size);
+        image.setTransparency(0);
         setImage(image);
-        //super.attach();
 
         
     }
@@ -71,25 +70,35 @@ public class NumberButton extends Button implements Buttons
     public void act()
     {
         if(!state.canEnterZip()) {
-            // make beep
+            //beep();
             return;
         }
         
-        if (Greenfoot.mousePressed(this))
+        else if (Greenfoot.mousePressed(this))
         {  
             System.out.println(getNumber());
-            Zipcode.getInstance().update(getNumber()); 
+            zipcode.update(getNumber()); 
+            
+              if ( zipcode.getZipcode() != null && zipcode.getZipcode().length() <= 5) {
+                String str = "Credit card inserted" +"\n" + "Please enter zipcode\n";
+                str = str + "Zipcode entered is "+ "\n";
+                str += zipcode.getZipcode();
+                screen.setMessage(str);
+                //screen.setMessage();
+            }
         }
     }
-
-    
-
-    public void execute(State state)
-    {
-        screen = getWorld().getObjects(Screen.class).get(0);
-       /* if(state.equals(state.INSERTCREDITCARD))
+    /*public void beep() {
+        if (!soundHasPlayed)
         {
-            Zipcode.getInstance().getZipcode();
-        }*/
-    }
+            sound.play();
+            soundHasPlayed = true; 
+        }
+        String str = "Beep!\n\nPlease insert credit card first\nand try again!";
+        setShowText(str);
+        setMessage();
+        state = State.WELCOME;
+    }*/
+
+   
 }

@@ -40,15 +40,15 @@ public class ZipcodeHandler extends ScreenState
           //state = State.INSERTCREDITCARD;
           //screen.setState(state);
           zipcode = Zipcode.getInstance();
-            if ( zipcode != null && zipcode.getZipcode().length() <= 5 && state.canEnterZip()) {
+         /*  if ( zipcode != null && zipcode.getZipcode().length() <= 5 && state.canEnterZip()) {
                 String str = "Credit card inserted" +"\n" + "Please enter zipcode\n";
                 str = str + "Zipcode entered is "+ "\n";
                 str += zipcode.getZipcode();
                 screen.setMessage(str);
                 //screen.setMessage();
-            }
+            }*/
          
-        }
+      }
     
     public void wrongZipcode()
     {

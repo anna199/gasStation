@@ -18,7 +18,7 @@ public class Completed extends State
     }
 
     public void moveToNextState(){
-        return;
+        stationState.setState(stationState.getInitState());
     }
     
     public boolean canEnterZip(){
@@ -37,5 +37,6 @@ public class Completed extends State
         
         return true;
     }
+    
    
 }
