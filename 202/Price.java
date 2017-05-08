@@ -71,6 +71,10 @@ public class Price
     public double getPrice()
     {
         return calculatePrice(time,gasType,carWash);
+    } 
+    public boolean getCarWash()
+    {
+        return carWash;
     }
 
     public static double round(double value, int places) {

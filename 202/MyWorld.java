@@ -30,7 +30,7 @@ public class MyWorld extends World
         addObject(new CreditCard(), 100, 100);
         addObject(new CreditCardSlot(), 310, 400);
         addObject(new Keypad(screen), 450, 400);
-        //addObject(new ZipcodeHandler(),0,0);
+        addObject(new ZipcodeHandler(),0,0);
         // add overlay buttons
         int x = 400-4;
         int y = 350-3;

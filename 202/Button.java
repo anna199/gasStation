@@ -14,17 +14,11 @@ public abstract class Button extends Actor
      */
     private String label;
     protected Screen screen;
-    protected State state;
-    protected StationState stationstate = StationState.getInstance();
 
     public Button (String label) {
         this.label = label;
-        stationstate.attach(this);
         //attach();
-    } 
-    public void update(State states) {
-        this.state = state;  
-    }
+    }   
     
 
    //public abstract void execute(State state);

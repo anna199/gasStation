@@ -12,12 +12,14 @@ public class FunctionButton extends Button implements Buttons
     private String Value;
     private boolean isClicked = false;
     private GreenfootImage image;
-    private String command = "";
+    private static String command = "";
     private String help = "";
     private Screen screen = Screen.getInstance();
     private CreditCard creditcard;
-
+    private StationState stationstate = StationState.getInstance();
+    private long pauseTime = 0;
     private Zipcode zipcode = Zipcode.getInstance();
+    private boolean carWash = false;
     public FunctionButton (String label) {
         // set value of the button
         // this value will be repor to Observer when button is click
@@ -27,7 +29,7 @@ public class FunctionButton extends Button implements Buttons
         image = new GreenfootImage(size, size);
         image.setTransparency(0);
         setImage(image);
-        
+
     }
 
     /**
@@ -68,19 +70,22 @@ public class FunctionButton extends Button implements Buttons
 
     public void execute()
     {
+        if(getButton() == "Cancel")
+        {
+            backToInit();
 
+        }
         if(stationstate.canEnterZip())
         {   
             help += getButton();
             System.out.println(help);
-            
-       
+
             if(help.equals("Enter"))
             {
                 creditcard = getWorld().getObjects(CreditCard.class).get(0);
 
                 String zip = zipcode.getZipcode();
-                
+
                 if(creditcard.checkZipcode(zip))
                 {  
                     screen.setMessage("Do you need help?\nYes      No");
@@ -92,7 +97,7 @@ public class FunctionButton extends Button implements Buttons
                 { 
 
                     System.out.println("wrong");
-                    String str = "Oops, Wrong zipcode.\n Please enter again\n";
+                    String str = "Oops, Wrong zipcode.\nPlease enter again\n";
                     screen.setMessage(str);
                     help = "";
                     Zipcode.getInstance().clear();
@@ -107,14 +112,11 @@ public class FunctionButton extends Button implements Buttons
                 screen.setMessage(str);
                 help = "";
             }
-            if(help.equals("Cancel"))
-            {
-                backToInit();
-            }
+          
             if(help.equals("Yes"))
             {
                 screen.setMessage("Help information:\nXXXXXXXXXXXXXXXXXX\n\n\nPress Enter to Move\nPress Cancel to cancel process");
-     
+
             }
             if(help.equals("No"))
             {
@@ -122,51 +124,49 @@ public class FunctionButton extends Button implements Buttons
                 screen.setMessage("Please choose fuel Type");
             }
             if(help.equals("EnterEnter"))
-                {
-                    stationstate.moveToNextState();
-                    screen.setMessage("Please choose fuel Type");
-                }
-            if(help.equals("EnterEnterCancel"))
-                {
-                    backToInit();
-                }
+            {
+                stationstate.moveToNextState();
+                screen.setMessage("Please choose fuel Type");
+            }
 
         }
-        
 
         if(stationstate.canPrintReceipt())
         {
             command += getButton();
-            if(getButton() == "Yes")
+            if(command.equals("Yes"))
             {
                 Price.getInstance().setCarWash(true);
                 screen.setMessage("Print your receipt?");
+                carWash = true;
             }
-            else if (getButton() == "No")
+            else if (command.equals("No"))
             {
                 Price.getInstance().setCarWash(false); 
                 screen.setMessage("Print your receipt?");
+                //command += "NotCarWash";
             }
             System.out.println(command);
+            //command += getButton();
+            
             if(command.equals("YesYes"))
             {
                 System.out.println(command);
                 screen.setMessage("Thank for choosing \nSuper 5 gas station\nYour price is: " + String.valueOf(Price.getInstance().getPrice()) +"\nYour car wash code is :" + getCarWashCode(1000,9000));
                 stationstate.moveToNextState();
-               
+                command = "";
             }
             else if(command.equals("NoYes"))
             {               
                 screen.setMessage("Thank for choosing \nSuper 5 gas station\nYour price is: " + String.valueOf(Price.getInstance().getPrice()));              
-               
+               command = "";
             }
             else if(command.equals("NoNo") || command.equals("YesNo") )
             {
                 screen.setMessage("Thank you for choosing us,Bye!");
-          
+                command = "";
             }
-                   
-       
+
         }
     }
 
@@ -183,13 +183,13 @@ public class FunctionButton extends Button implements Buttons
         int normal = Greenfoot.getRandomNumber(end-start+1);
         return normal+start;
     }
+
     public void backToInit()
     {
-                    Greenfoot.setWorld(new MyWorld());
-                    screen.setMessage("Welcome to Super 5 Gas Station" + "\n" +"Please insert card");
-                    stationstate.setState(stationstate.getInitState());
-                    Zipcode.getInstance().clear();
-    }
-
+        Greenfoot.setWorld(new MyWorld());
+        screen.setMessage("Welcome to Super 5 Gas Station" + "\n" +"Please insert card");
+        stationstate.setState(stationstate.getInitState());
+        Zipcode.getInstance().clear();
+    } 
 }
 
