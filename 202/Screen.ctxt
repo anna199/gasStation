@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=Screen
+comment1.params=
+comment1.target=Screen()
+comment2.params=
+comment2.target=Screen\ getInstance()
+comment3.params=
+comment3.target=void\ act()
+comment4.params=str
+comment4.target=void\ setMessage(java.lang.String)
+comment5.params=
+comment5.target=void\ setMessage()
+comment6.params=str
+comment6.target=void\ setShowText(java.lang.String)
+numComments=7

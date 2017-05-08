@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=PrintRecipt
+comment0.text=\n\ Write\ a\ description\ of\ class\ PrintRecipt\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=
+comment1.target=PrintRecipt()
+comment2.params=
+comment2.target=void\ printRecipt()
+numComments=3

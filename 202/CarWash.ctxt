@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=CarWash
+comment0.text=\n\ Write\ a\ description\ of\ class\ CarWash\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=screen
+comment1.target=CarWash(Screen)
+comment1.text=\n\ Constructor\ for\ objects\ of\ class\ CarWash\n
+comment2.params=
+comment2.target=void\ chooseWashOrNot()
+comment2.text=\n\ An\ example\ of\ a\ method\ -\ replace\ this\ comment\ with\ your\ own\n\ \n\ @param\ \ y\ \ \ a\ sample\ parameter\ for\ a\ method\n\ @return\ \ \ \ \ the\ sum\ of\ x\ and\ y\ \n
+numComments=3

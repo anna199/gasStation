@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=InitState
+comment0.text=\n\ Write\ a\ description\ of\ class\ Init\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=state
+comment1.target=InitState(StationState)
+comment1.text=\n\ Constructor\ for\ objects\ of\ class\ Init\n
+comment2.params=
+comment2.target=void\ act()
+comment3.params=
+comment3.target=void\ moveToNextState()
+comment4.params=
+comment4.target=boolean\ canEnterZip()
+comment5.params=
+comment5.target=boolean\ canEnterGasType()
+comment6.params=
+comment6.target=boolean\ canPump()
+comment7.params=
+comment7.target=boolean\ canPrintReceipt()
+numComments=8

@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=FuelTypeButton
+comment0.text=\n\ Write\ a\ description\ of\ class\ fuelTypeButtons\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=label
+comment1.target=FuelTypeButton(java.lang.String)
+comment2.params=
+comment2.target=java.lang.String\ getNumber()
+comment2.text=\n\ Act\ -\ do\ whatever\ the\ functionButtons\ wants\ to\ do.\ This\ method\ is\ called\ whenever\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\n
+comment3.params=
+comment3.target=void\ act()
+comment4.params=
+comment4.target=java.lang.String\ GetContent()
+numComments=5

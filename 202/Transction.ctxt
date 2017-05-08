@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=Transction
+comment0.text=\n\ Write\ a\ description\ of\ class\ Init\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=state
+comment1.target=Transction(StationState)
+comment1.text=\n\ Constructor\ for\ objects\ of\ class\ Init\n
+comment2.params=
+comment2.target=void\ moveToNextState()
+comment3.params=
+comment3.target=boolean\ canEnterZip()
+comment4.params=
+comment4.target=boolean\ canEnterGasType()
+comment5.params=
+comment5.target=boolean\ canPump()
+comment6.params=
+comment6.target=boolean\ canPrintReceipt()
+numComments=7
