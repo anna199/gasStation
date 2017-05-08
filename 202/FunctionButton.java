@@ -149,7 +149,7 @@ public class FunctionButton extends Button implements Buttons
             System.out.println(command);
             //command += getButton();
             
-            if(command.equals("YesYes"))
+            if(command.equals("YesYes")|| command.equals("YesNo"))
             {
                 System.out.println(command);
                 screen.setMessage("Thank for choosing \nSuper 5 gas station\nYour price is: " + String.valueOf(Price.getInstance().getPrice()) +"\nYour car wash code is :" + getCarWashCode(1000,9000));
@@ -161,7 +161,7 @@ public class FunctionButton extends Button implements Buttons
                 screen.setMessage("Thank for choosing \nSuper 5 gas station\nYour price is: " + String.valueOf(Price.getInstance().getPrice()));              
                command = "";
             }
-            else if(command.equals("NoNo") || command.equals("YesNo") )
+            else if(command.equals("NoNo") )
             {
                 screen.setMessage("Thank you for choosing us,Bye!");
                 command = "";
