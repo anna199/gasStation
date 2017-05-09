@@ -57,7 +57,7 @@ public class GasPumper extends Actor
     public void startPump(){
 		isPumpStarted = true;
 		//screen = getWorld().getObjects(Screen.class).get(0);
-		screen.setMessage("Pumping started, \n Click again to stop.");
+		screen.setMessage("Pumping started, \nClick again to stop.");
         this.startPumpTime =  System.currentTimeMillis();
     }
     public void endPump(){

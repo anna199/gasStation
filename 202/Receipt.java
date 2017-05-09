@@ -57,7 +57,7 @@ public class Receipt extends Actor
     public void setMessage () 
     {
        message.setText(showText);
-       getWorld().addObject(message,660,160);
+       getWorld().addObject(message,650,160);
     }
     public void setShowText(String str)
     {

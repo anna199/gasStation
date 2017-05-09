@@ -16,7 +16,7 @@ public class InitState extends State
     public InitState (StationState state)
     {
         stationState = state;
-        Screen.getInstance().setMessage("Welcome to Super 5 Gas Station" + "\n" +"Please insert card");
+        Screen.getInstance().setMessage("Welcome to \nSuper 5 Gas Station!" + "\n" +"Please insert card");
     }
     public void act()
     {

@@ -191,7 +191,7 @@ public class FunctionButton extends Button implements Buttons
     public void backToInit()
     {
         Greenfoot.setWorld(new MyWorld());
-        screen.setMessage("Welcome to Super 5 Gas Station" + "\n" +"Please insert card");
+        screen.setMessage("Welcome to \nSuper 5 Gas Station!" + "\n" +"Please insert card");
         stationstate.setState(stationstate.getInitState());
         Zipcode.getInstance().clear();
         command = "";
