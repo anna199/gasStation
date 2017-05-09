@@ -53,8 +53,6 @@ public class FuelTypeButton extends Button implements Buttons
     {
 
         if(!state.canEnterGasType()) {
-            // make beep
-            //state.currentState();
             return;
         }
 
@@ -64,9 +62,8 @@ public class FuelTypeButton extends Button implements Buttons
             Price.getInstance().setType(Integer.parseInt(getNumber()));
           
             screen.setMessage("You have choosed  " + getNumber() +"\n Please remove the pump");
-            //Greenfoot.delay(300);
-            //screen.setMessage("please remove the pump");
-             state.moveToNextState();
+        
+            state.moveToNextState();
         }
     }  
 

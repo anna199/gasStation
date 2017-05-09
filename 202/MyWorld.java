@@ -33,7 +33,6 @@ public class MyWorld extends World
         addObject(new CreditCardSlot(), 310, 400);
         addObject(new Keypad(screen), 450, 400);
         addObject(receipt,650,200);
-        addObject(new ZipcodeHandler(),0,0);
         // add overlay buttons
         int x = 400-4;
         int y = 350-3;
@@ -106,13 +105,6 @@ public class MyWorld extends World
         }
         
         addObject(new GasPumper(), 130, 400);
-        addObject(new PrintRecipt(), 0,0);
-     
-        //new Welcome().run();
         
     }
-    
-    //public static MyWorld getWorld(){
-        //return world;
-    //}
 }

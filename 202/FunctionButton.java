@@ -74,7 +74,7 @@ public class FunctionButton extends Button implements Buttons
     {
         if(getButton() == "Cancel")
         {
-            backToInit();
+           setExit();
 
         }
         if(stationstate.canEnterZip())
@@ -146,29 +146,24 @@ public class FunctionButton extends Button implements Buttons
             {
                 Price.getInstance().setCarWash(false); 
                 screen.setMessage("Print your receipt?");
-                //command += "NotCarWash";
             }
             System.out.println(command);
-            //command += getButton();
             
             if(command.equals("YesYes") || command.equals("YesNo"))
             {
                 System.out.println(command);
                 receipt.setMessage("Thank for choosing \nSuper 5 gas station\nYour price is: " + String.valueOf(Price.getInstance().getPrice()) +"\nYour car wash code is :" + getCarWashCode(1000,9000));
-                backToInit();
-                command = "";
+                setExit();
             }
             else if(command.equals("NoYes"))
             {               
                 receipt.setMessage("Thank for choosing \nSuper 5 gas station\nYour price is: " + String.valueOf(Price.getInstance().getPrice()));              
-                backToInit();
-                command = "";
+                setExit();
             }
             else if(command.equals("NoNo"))
             {
                 screen.setMessage("Thank you for choosing us,Bye!");
-                backToInit();
-                command = "";
+                setExit();
             }
 
         }
@@ -188,13 +183,16 @@ public class FunctionButton extends Button implements Buttons
         return normal+start;
     }
 
-    public void backToInit()
+   
+    public void setExit()
     {
-        Greenfoot.setWorld(new MyWorld());
-        screen.setMessage("Welcome to \nSuper 5 Gas Station!" + "\n" +"Please insert card");
-        stationstate.setState(stationstate.getInitState());
-        Zipcode.getInstance().clear();
-        command = "";
-    } 
+       ExitCommand exitCommand = new ExitCommand();
+       Controller controller = new Controller();
+       exitCommand.setReceiver(controller);
+       exitCommand.execute();
+     }
+     public static void setCommand(String s) {
+         command = s;
+      }
 }
 
