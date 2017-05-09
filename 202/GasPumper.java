@@ -45,7 +45,7 @@ public class GasPumper extends Actor
                 screen.setMessage("you pumped " + pumperTimeUsed + " sec" + "\nDo you need car wash?");
                
                 state.moveToNextState();
-                Greenfoot.delay(100);
+                //Greenfoot.delay(100);
                 Price.getInstance().setTime(pumperTimeUsed);
                 //screen.setMessage("would you like to print your receipt?");
                 

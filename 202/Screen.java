@@ -1,11 +1,30 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
+import java.awt.Color;
 
 public class Screen extends Actor
 {
     
     private Message message = new Message();
     private String showText ="START";
+    private Keypad keypad;
+    //private List<Button> Buttons;
+    
+    private CreditCard creditCard;
+    //private static String zipcode = null;
+    private String fuelType;
+    private static State state;
+    private boolean isWashed;
+    private boolean soundHasPlayed = false;
+    private boolean isReciptPrint = false;
+    private ZipcodeHandler zipcodeHandler;
+    private SelectFuelType selectFuelType;
+    private CarWash carWash;
+    private PumpGas pumpGas;
+    private ShowRecipt showRecipt;
+    private ReciptState reciptState;
+    private long gasPumpTime;
+    private static StationState stationState = StationState.getInstance();
     /**
      * Constructor for objects of class Zipcode
      */
@@ -16,6 +35,7 @@ public class Screen extends Actor
         showText = "";
         GreenfootImage image = getImage();
         image.scale(300, 200);
+       
     }
     
     public static Screen getInstance() {

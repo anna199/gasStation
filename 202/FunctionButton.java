@@ -20,6 +20,8 @@ public class FunctionButton extends Button implements Buttons
     private long pauseTime = 0;
     private Zipcode zipcode = Zipcode.getInstance();
     private boolean carWash = false;
+    private Receipt receipt = Receipt.getInstance();
+    private Price price;
     public FunctionButton (String label) {
         // set value of the button
         // this value will be repor to Observer when button is click
@@ -149,30 +151,26 @@ public class FunctionButton extends Button implements Buttons
             System.out.println(command);
             //command += getButton();
             
-            if(command.equals("YesYes")|| command.equals("YesNo"))
+            if(command.equals("YesYes") || command.equals("YesNo"))
             {
                 System.out.println(command);
-                screen.setMessage("Thank for choosing \nSuper 5 gas station\nYour price is: " + String.valueOf(Price.getInstance().getPrice()) +"\nYour car wash code is :" + getCarWashCode(1000,9000));
-                stationstate.moveToNextState();
+                receipt.setMessage("Thank for choosing \nSuper 5 gas station\nYour price is: " + String.valueOf(Price.getInstance().getPrice()) +"\nYour car wash code is :" + getCarWashCode(1000,9000));
+                backToInit();
                 command = "";
-                setExit();
             }
             else if(command.equals("NoYes"))
             {               
-                screen.setMessage("Thank for choosing \nSuper 5 gas station\nYour price is: " + String.valueOf(Price.getInstance().getPrice()));              
-               command = "";
-               setExit();
+                receipt.setMessage("Thank for choosing \nSuper 5 gas station\nYour price is: " + String.valueOf(Price.getInstance().getPrice()));              
+                backToInit();
+                command = "";
             }
-            else if(command.equals("NoNo") )
+            else if(command.equals("NoNo"))
             {
                 screen.setMessage("Thank you for choosing us,Bye!");
+                backToInit();
                 command = "";
-                setExit();
             }
-<<<<<<< HEAD
-=======
-            setExit();
->>>>>>> d60392f4d48a362a042ac83bb8195df661028ccd
+
         }
     }
 
@@ -196,13 +194,7 @@ public class FunctionButton extends Button implements Buttons
         screen.setMessage("Welcome to Super 5 Gas Station" + "\n" +"Please insert card");
         stationstate.setState(stationstate.getInitState());
         Zipcode.getInstance().clear();
+        command = "";
     } 
-    public void setExit()
-    {
-        ExitCommand exitCommand = new ExitCommand();
-        Controller controller = new Controller();
-        exitCommand.setReceiver(controller);
-        exitCommand.execute();
-    }
 }
 
