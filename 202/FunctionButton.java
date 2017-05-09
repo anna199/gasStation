@@ -169,6 +169,10 @@ public class FunctionButton extends Button implements Buttons
                 command = "";
                 setExit();
             }
+<<<<<<< HEAD
+=======
+            setExit();
+>>>>>>> d60392f4d48a362a042ac83bb8195df661028ccd
         }
     }
 
