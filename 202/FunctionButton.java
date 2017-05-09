@@ -166,7 +166,7 @@ public class FunctionButton extends Button implements Buttons
                 screen.setMessage("Thank you for choosing us,Bye!");
                 command = "";
             }
-
+            setExit();
         }
     }
 
@@ -191,5 +191,12 @@ public class FunctionButton extends Button implements Buttons
         stationstate.setState(stationstate.getInitState());
         Zipcode.getInstance().clear();
     } 
+    public void setExit()
+    {
+        ExitCommand exitCommand = new ExitCommand();
+        Controller controller = new Controller();
+        exitCommand.setReceiver(controller);
+        exitCommand.execute();
+    }
 }
 
