@@ -17,8 +17,7 @@ public class FuelTypeButton extends Button implements Buttons
     private boolean isClicked = false;
     private GreenfootImage image;
     private String type;
-    private Screen screen = Screen.getInstance();;
-    private StationState state = StationState.getInstance();
+    private Screen screen = Screen.getInstance();
 
     public FuelTypeButton (String label) {
         // set value of the button
@@ -52,7 +51,7 @@ public class FuelTypeButton extends Button implements Buttons
     public void act()
     {
 
-        if(!state.canEnterGasType()) {
+        if(!stationstate.canEnterGasType()) {
             return;
         }
 
@@ -63,7 +62,7 @@ public class FuelTypeButton extends Button implements Buttons
           
             screen.setMessage("You have choosed  " + getNumber() +"\n Please remove the pump");
         
-            state.moveToNextState();
+            stationstate.moveToNextState();
         }
     }  
 

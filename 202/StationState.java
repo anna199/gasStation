@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 /**
  * Write a description of class StationState here.
  * 
@@ -13,6 +15,7 @@ public class StationState
     State transaction;
     State pump;
     State completed;
+    private List<Button> observers = new ArrayList<Button>();
     
     State state;
     
@@ -59,6 +62,7 @@ public class StationState
     public void setState(State state)
     {
         this.state = state;
+        notifyAllObservers(state);
     }
      public State getState()
     {
@@ -88,5 +92,14 @@ public class StationState
     
     public void currentState(){
         System.out.println(state.getClass().getName().toString());
+    }
+        public void attach(Button observer){
+      observers.add(observer);		
+    }
+ 
+    public void notifyAllObservers(State state){
+       for (Button observer : observers) {
+          observer.update(state);
+       }
     }
 }

@@ -16,7 +16,7 @@ public class FunctionButton extends Button implements Buttons
     private String help = "";
     private Screen screen = Screen.getInstance();
     private CreditCard creditcard;
-    private StationState stationstate = StationState.getInstance();
+   
     private long pauseTime = 0;
     private Zipcode zipcode = Zipcode.getInstance();
     private boolean carWash = false;
@@ -139,8 +139,10 @@ public class FunctionButton extends Button implements Buttons
             if(command.equals("Yes"))
             {
                 Price.getInstance().setCarWash(true);
-                screen.setMessage("Print your receipt?");
                 carWash = true;
+                receipt.setMessage("Thank for choosing \nSuper 5 gas station\nYour price is: " + String.valueOf(Price.getInstance().getPrice()) +"\nYour car wash code is :" + getCarWashCode(1000,9000));
+                setExit();
+                
             }
             else if (command.equals("No"))
             {
@@ -149,13 +151,8 @@ public class FunctionButton extends Button implements Buttons
             }
             System.out.println(command);
             
-            if(command.equals("YesYes") || command.equals("YesNo"))
-            {
-                System.out.println(command);
-                receipt.setMessage("Thank for choosing \nSuper 5 gas station\nYour price is: " + String.valueOf(Price.getInstance().getPrice()) +"\nYour car wash code is :" + getCarWashCode(1000,9000));
-                setExit();
-            }
-            else if(command.equals("NoYes"))
+      
+            if(command.equals("NoYes"))
             {               
                 receipt.setMessage("Thank for choosing \nSuper 5 gas station\nYour price is: " + String.valueOf(Price.getInstance().getPrice()));              
                 setExit();

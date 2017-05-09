@@ -14,9 +14,6 @@ public class NumberButton extends Button implements Buttons
     private GreenfootImage image;
     private Screen screen = Screen.getInstance();
     private Zipcode zipcode = Zipcode.getInstance();
-    private boolean soundHasPlayed = false;
-    
-    private StationState state = StationState.getInstance();
    
 
     public NumberButton (String label) {
@@ -69,8 +66,8 @@ public class NumberButton extends Button implements Buttons
 
     public void act()
     {
-        if(!state.canEnterZip()) {
-            //beep();
+        if(!stationstate.canEnterZip() && Greenfoot.mousePressed(this)) {
+            beep();
             return;
         }
         
@@ -88,17 +85,15 @@ public class NumberButton extends Button implements Buttons
             }
         }
     }
-    /*public void beep() {
-        if (!soundHasPlayed)
-        {
-            sound.play();
-            soundHasPlayed = true; 
-        }
+   public void beep() {
+       GreenfootSound sound = new GreenfootSound("sounds/beep.wav");
+             sound.play();
+      
         String str = "Beep!\n\nPlease insert credit card first\nand try again!";
-        setShowText(str);
-        setMessage();
-        state = State.WELCOME;
-    }*/
+        screen.setMessage(str);
+        stationstate.setState(stationstate.getInitState());
+        screen.setMessage("Welcome to \nSuper 5 Gas Station!" + "\n" +"Please insert card");
+    }
 
    
 }
