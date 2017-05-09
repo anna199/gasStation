@@ -155,18 +155,20 @@ public class FunctionButton extends Button implements Buttons
                 screen.setMessage("Thank for choosing \nSuper 5 gas station\nYour price is: " + String.valueOf(Price.getInstance().getPrice()) +"\nYour car wash code is :" + getCarWashCode(1000,9000));
                 stationstate.moveToNextState();
                 command = "";
+                setExit();
             }
             else if(command.equals("NoYes"))
             {               
                 screen.setMessage("Thank for choosing \nSuper 5 gas station\nYour price is: " + String.valueOf(Price.getInstance().getPrice()));              
                command = "";
+               setExit();
             }
             else if(command.equals("NoNo") )
             {
                 screen.setMessage("Thank you for choosing us,Bye!");
                 command = "";
+                setExit();
             }
-
         }
     }
 
@@ -191,5 +193,12 @@ public class FunctionButton extends Button implements Buttons
         stationstate.setState(stationstate.getInitState());
         Zipcode.getInstance().clear();
     } 
+    public void setExit()
+    {
+        ExitCommand exitCommand = new ExitCommand();
+        Controller controller = new Controller();
+        exitCommand.setReceiver(controller);
+        exitCommand.execute();
+    }
 }
 
