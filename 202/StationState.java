@@ -10,14 +10,14 @@ public class StationState
 {
     private static StationState stationState;
     
-    State initState;
-    State ccScanned;
-    State transaction;
-    State pump;
-    State completed;
+    private State initState;
+    private State ccScanned;
+    private State transaction;
+    private State pump;
+    private State completed;
     private List<Button> observers = new ArrayList<Button>();
     
-    State state;
+    private State state;
     
     /**
      * Constructor for objects of class StationState
